@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Predict Rating Of Restaurant</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="./static/style_rating_prediction.css" type = 'text/css'>
+
+</head>
+
+<body>
+
+
+
+<style>
+body {
+  background-image: url("./static/rating_pred.PNG");
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  overflow-x:hidden;
+}
+::placeholder {
+  color: black;
+  opacity: 1; /* Firefox */
+}
+</style>
+
+
+
+ <div class="login">
+	<h1>Predict Zomato Restaurant Ratings</h1>
+
+     <!-- Main Input For Receiving Query to our ML -->
+    <form action="/predict_rating_of_resto" method="post">
+
+
+            <input type="text" name = "votes" placeholder="total number of votes" required="required">
+            <input type="text" name="approx_cost_for_two_people" placeholder="Approximate Cost for Two people" required="required" />
+            <input type="text" name="number_of_cuisines_offered" placeholder="Number of Cuisines offered" required="required"/>
+
+    	<select name="online_order" aria-label="online_order_facility" required="required">
+          <option value="">Is Online Order Facility Available</option>
+          <option value="1">Yes</option>
+          <option value="0">No</option>
+           </select>
+
+        <select name="book_table" aria-label="booking_table_facility" required="required">
+          <option value="">Is Booking Table Facility Available</option>
+          <option value="1">Yes</option>
+          <option value="0">No</option>
+           </select>
+
+
+        <select name="location" aria-label="Location" required="required">
+
+
+            <option value="" >Location</option>
+            <option value="0000000000000000000000000000000000000000000000">BTM</option>
+            <option value="1000000000000000000000000000000000000000000000">Banashankari</option>
+            <option value="0100000000000000000000000000000000000000000000">Banaswadi</option>
+            <option value="0010000000000000000000000000000000000000000000">Bannerghatta Road</option>
+            <option value="0001000000000000000000000000000000000000000000">Basavanagudi</option>
+            <option value="0000100000000000000000000000000000000000000000">Bellandur</option>
+            <option value="0000010000000000000000000000000000000000000000">Brigade Road</option>
+            <option value="0000001000000000000000000000000000000000000000">Brooke Field</option>
+            <option value="0000000100000000000000000000000000000000000000">Church Street</option>
+            <option value="0000000010000000000000000000000000000000000000">Commercial Street</option>
+            <option value="0000000001000000000000000000000000000000000000">Cunningham Road</option>
+            <option value="0000000000100000000000000000000000000000000000">Domlur</option>
+            <option value="0000000000010000000000000000000000000000000000">Ejipura</option>
+            <option value="0000000000001000000000000000000000000000000000">Electronic City</option>
+            <option value="0000000000000100000000000000000000000000000000">Frazer Town</option>
+            <option value="0000000000000010000000000000000000000000000000">HSR</option>
+            <option value="0000000000000001000000000000000000000000000000">Indiranagar</option>
+            <option value="0000000000000000100000000000000000000000000000">JP Nagar</option>
+            <option value="0000000000000000010000000000000000000000000000">JayaNagar</option>
+            <option value="0000000000000000001000000000000000000000000000">Jeevan Bhima Nagar</option>
+            <option value="0000000000000000000100000000000000000000000000">Kalyan Nagar</option>
+            <option value="0000000000000000000010000000000000000000000000">Kammanahalli</option>
+            <option value="0000000000000000000001000000000000000000000000">Koramangala 1st Block</option>
+            <option value="0000000000000000000000100000000000000000000000">Koramangala 3rd Block</option>
+            <option value="0000000000000000000000010000000000000000000000">Koramangala 4th Block</option>
+            <option value="0000000000000000000000001000000000000000000000">Koramangala 5th Block</option>
+            <option value="0000000000000000000000000100000000000000000000">Koramangala 6th Block</option>
+            <option value="0000000000000000000000000010000000000000000000">Koramangala 7th Block</option>
+            <option value="0000000000000000000000000001000000000000000000">Koramangala 8th Block</option>
+            <option value="0000000000000000000000000000100000000000000000">lavelle Road</option>
+            <option value="0000000000000000000000000000010000000000000000">MG Road</option>
+            <option value="0000000000000000000000000000001000000000000000">Malleshwaran</option>
+            <option value="0000000000000000000000000000000100000000000000">Marathahalli</option>
+            <option value="0000000000000000000000000000000010000000000000">New Bel Road</option>
+            <option value="0000000000000000000000000000000001000000000000">Old Airport Road</option>
+            <option value="0000000000000000000000000000000000100000000000">Rajajinagar</option>
+            <option value="0000000000000000000000000000000000010000000000">Residency Road</option>
+            <option value="0000000000000000000000000000000000001000000000">Richmond Road</option>
+            <option value="0000000000000000000000000000000000000100000000">Sarjapur Road</option>
+            <option value="0000000000000000000000000000000000000010000000">Shanti Nagar</option>
+            <option value="0000000000000000000000000000000000000001000000">Shivajinagar</option>
+            <option value="0000000000000000000000000000000000000000100000">St. Marks Road</option>
+            <option value="0000000000000000000000000000000000000000010000">Ulsoor</option>
+            <option value="0000000000000000000000000000000000000000001000">Vasanth Nagar</option>
+            <option value="0000000000000000000000000000000000000000000100">Whitefield</option>
+            <option value="0000000000000000000000000000000000000000000010">Wilson Garden</option>
+            <option value="0000000000000000000000000000000000000000000001">Other</option>
+
+        </select>
+
+            <select name = "restaurant_type" aria-label="Restaurant_Type" required="required">
+          <option value="">Restaurant Type</option>
+            <option value="0000000000">Bakery</option>
+            <option value="1000000000">Bar</option>
+            <option value="0100000000">Beverage Shop</option>
+            <option value="0010000000">Cafe</option>
+            <option value="0001000000">Casual Dining</option>
+            <option value="0000100000">Casual Dining,Bar</option>
+            <option value="0000010000">Delivery</option>
+            <option value="0000001000">Dessert Parlour</option>
+            <option value="0000000100">Quick Bites</option>
+            <option value="0000000010">Takeaway,Delivery</option>
+            <option value="0000000001">Other</option>
+            </select>
+
+
+
+
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+    </form>
+
+   <br>
+   <br>
+   {{ prediction_text }}
+
+ </div>
+
+</form>
+</body>
+</html>
